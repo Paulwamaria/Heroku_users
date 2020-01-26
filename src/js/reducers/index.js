@@ -1,9 +1,5 @@
 
-import {
-    FETCH_USERS_REQUEST,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAILURE
-}from "../actions/action";
+
 
 let initialState = {
  loading: false,
@@ -34,6 +30,7 @@ const userReducer = (state=initialState, action) => {
                 payload: action.payload
             }
     }
+    return state
 }
 
 export default userReducer
