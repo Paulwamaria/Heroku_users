@@ -1,16 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component , useEffect } from 'react'
+import { connect } from 'react-redux';
+import { fetchUsers } from '../actions/action';
 
-class Card extends Component {
-    render() {
-        return (
-            <div>
-               <img src="" /> 
-               <p>User info go here</p>
-            </div>
-        )
+
+function Card(userData,fetchUsers) {
+    useEffect(() => {
+    fetchUsers()
+},[])
+    return userData.loading ? (
+        <h3>Loading </h3>
+    ) : userData.error ? (
+    <h3>{userData.error}</h3>
+    ): ( 
+        <div>
+            <h3>User List</h3> &&
+            userData.users
+        </div>
+    )
+}
+
+
+const mapStateToProps = state => {
+
+    return {
+        userData: state.name
     }
 }
 
-export default Card
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUsers: () => dispatch(fetchUsers())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Card)
 
 
